@@ -1,0 +1,40 @@
+name: Geçiş uygulamasını ZIP'ten kur
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'gecis-istanbul-v2.zip'
+      - '.github/workflows/unpack-gecis.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Depoyu al
+        uses: actions/checkout@v4
+      - name: Uygulamayı kök dizine çıkar
+        shell: bash
+        run: |
+          unzip -o gecis-istanbul-v2.zip -d .
+          test -s index.html
+          test -s styles.css
+          test -s app.js
+          test -f manifest.webmanifest
+          test -f sw.js
+          test -f icons/icon-180.png
+      - name: Dosyaları main dalına kaydet
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html styles.css app.js manifest.webmanifest sw.js README.md icons/
+          if git diff --cached --quiet; then
+            echo "Dosyalar zaten güncel."
+          else
+            git commit -m "Deploy Geçiş PWA from release ZIP"
+            git push origin HEAD:main
+          fi
