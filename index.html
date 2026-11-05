@@ -1,1 +1,27 @@
-
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f6f3" />
+  <meta name="description" content="Öğrenci abonmanının geçişlerini, rotalarını ve aylık planını tek yerde takip et." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Geçiş" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./icons/icon-180.png" />
+  <link rel="icon" type="image/png" href="./icons/icon-192.png" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>Geçiş · Abonman takip</title>
+</head>
+<body>
+  <div class="shell">
+    <header id="top" class="top"></header>
+    <main id="view" aria-live="polite"></main>
+  </div>
+  <nav id="nav" class="tab-bar" aria-label="Alt gezinme"></nav>
+  <div id="overlay"></div>
+  <input id="import-file" type="file" accept=".json,application/json" hidden />
+  <script defer src="./app.js"></script>
+</body>
+</html>
